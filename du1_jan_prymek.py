@@ -1,71 +1,77 @@
 from math import ceil
 from turtle import forward, right, left, speed, circle, setpos, penup, pendown, exitonclick
-speed(10)                           # Rychlost vykreslování
+speed(10)                                  # Rychlost vykreslování
 
-a=int(input("Počet sloupců: "))     # Počet sloupců mřížky
-b=int(input("Počet řádků: "))       # Počet řádků mřížky
-strana=50                           # Velikost strany jednoho čtverce v mřížce
+sloupce=int(input("Počet sloupců: "))      # Počet sloupců mřížky
+while sloupce<=0:                          # Číslo nesmí být nižší nebo rovné nule
+        print("Zkus to znovu")
+        sloupce=int(input("Počet sloupců: "))
+radky=int(input("Počet řádků: "))          # Počet řádků mřížky
+while radky<=0:                            # Číslo nesmí být nižší nebo rovné nule
+        print("Zkus to znovu")
+        radky=int(input("Počet sloupců: "))
+strana=50                                  # Velikost strany jednoho čtverce v mřížce
 
-for k in range (b):                 # Nakreslí tabulku    
-    for j in range(a):              # Nakreslí řádek        
-        for i in range(4):          # Nakreslí čtverec
+for k in range (radky):                    # Nakreslí tabulku    
+    for j in range(sloupce):               # Nakreslí řádek        
+        for i in range(4):                 # Nakreslí čtverec
             forward(strana)
             right(90)
         forward(strana)
     left(180)
-    forward(a*strana)
+    forward(sloupce*strana)
     left(90)
     forward(strana)
     left(90)
-penup()                             # Zvednutí tužky, přerušení psaní
+penup()                                    # Zvednutí tužky, přerušení psaní
 
-c=(ceil((a*b)/2))                   # Maximální počet tahů
-p=0                                 # Počítadlo tahů
+tahy=(ceil((sloupce*radky)/2))             # Maximální počet tahů
+pocet_tahu=0                               # Počítadlo tahů
 
-for l in range(c):                  # Nakreslí křížky a kolečka
+for l in range(tahy):                      # Nakreslí křížky a kolečka
     print("Na tahu je první hráč")
-    x=int(input("Sloupec: "))       # První hráč zadá číslo sloupce, do kterého chce nakreslit křížek
-    while x>a or x<=0:              # Číslo nesmí být vyšší, než je počet sloupců a zároveň nesmí být nižší nebo rovné nule
+    cislo_sloupce=int(input("Sloupec: "))               # První hráč zadá číslo sloupce, do kterého chce nakreslit křížek
+    while cislo_sloupce>sloupce or cislo_sloupce<=0:    # Číslo nesmí být vyšší, než je počet sloupců a zároveň nesmí být nižší nebo rovné nule
         print("Zkus to znovu")
-        x=int(input("Sloupec: "))
+        cislo_sloupce=int(input("Sloupec: "))
     
-    y=int(input("Řádek: "))         # První hráč zadá číslo řádku, do kterého chce nakreslit křížek
-    while y>b or y<=0:              # Číslo nesmí být vyšší, než je počet řádků a zároveň nesmí být nižší nebo rovné nule
+    cislo_radku=int(input("Řádek: "))                   # První hráč zadá číslo řádku, do kterého chce nakreslit křížek
+    while cislo_radku>radky or cislo_radku<=0:          # Číslo nesmí být vyšší, než je počet řádků a zároveň nesmí být nižší nebo rovné nule
         print("Zkus to znovu")
-        y=int(input("Řádek: "))
+        cislo_radku=int(input("Řádek: "))
 
-    setpos(x*50-25, -y*50+25)       # Souřadnice políčka v mřížce
+    setpos(cislo_sloupce*strana-strana/2, -cislo_radku*strana+strana/2)       # Souřadnice políčka v mřížce
     pendown()                       # Položení tužky, pokračování ve psaní
     for m in range(4):              # Nakreslení křížku
         left(45)
-        forward(20)
+        forward(strana/2-5)
         left(180)
-        forward(20)
+        forward(strana/2-5)
         left(45)
     penup()
 
-    p=p+1                           # Přičtení tahu
-    if p==a*b:                      # Pokud se počet tahů rovná počtu polí, hra skončí
+    pocet_tahu=pocet_tahu+1         # Přičtení tahu
+    if pocet_tahu==sloupce*radky:   # Pokud se počet tahů rovná počtu polí, hra skončí
         break
 
     print("Na tahu je druhý hráč")
-    x=int(input("Sloupec: "))       # Druhý hráč zadá číslo sloupce, do kterého chce nakreslit kolečko
-    while x>a or x<=0:              # Číslo nesmí být vyšší, než je počet sloupců a zároveň nesmí být nižší nebo rovné nule
+    cislo_sloupce=int(input("Sloupec: "))                   # Druhý hráč zadá číslo sloupce, do kterého chce nakreslit kolečko
+    while cislo_sloupce>sloupce or cislo_sloupce<=0:        # Číslo nesmí být vyšší, než je počet sloupců a zároveň nesmí být nižší nebo rovné nule
         print("Zkus to znovu")
-        x=int(input("Sloupec: "))
+        cislo_sloupce=int(input("Sloupec: "))
 
-    y=int(input("Řádek: "))         # Druhý hráč zadá číslo řádku, do kterého chce nakreslit kolečko
-    while y>b or y<=0:              # Číslo nesmí být vyšší, než je počet řádků a zároveň nesmí být nižší nebo rovné nule
+    cislo_radku=int(input("Řádek: "))                       # Druhý hráč zadá číslo řádku, do kterého chce nakreslit kolečko
+    while cislo_radku>radky or cislo_radku<=0:              # Číslo nesmí být vyšší, než je počet řádků a zároveň nesmí být nižší nebo rovné nule
         print("Zkus to znovu")
-        y=int(input("Řádek: "))
+        cislo_radku=int(input("Řádek: "))
 
-    setpos(x*50-25, -y*50+25-20)    # Nakreslení kolečka
+    setpos(cislo_sloupce*strana-strana/2, -cislo_radku*strana+5)        # Nakreslení kolečka
     pendown()
-    circle(20)
+    circle(strana/2-5)
     penup()
     
-    p=p+1                           # Přičtení tahu
-    if p==a*b:
+    pocet_tahu=pocet_tahu+1         # Přičtení tahu
+    if pocet_tahu==sloupce*radky:
         break
 
 print("Pěkná hra!")
